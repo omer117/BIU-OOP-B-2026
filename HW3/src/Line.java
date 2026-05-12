@@ -1,4 +1,3 @@
-package src;
 /*
 
 Name: Omer Asraf
@@ -7,9 +6,7 @@ Course: OOP
 
 */
 
-
-
-
+import java.util.List;
 
 /**
  * A Line is repesented here with 2 Points,
@@ -24,7 +21,7 @@ public class Line {
      * First Constructor gets 2 points and creates a line.
      *
      * @param start - The starting point of this Line.
-     * @param end - The ending point of this Line.
+     * @param end   - The ending point of this Line.
      */
     public Line(Point start, Point end) {
         this.start = start;
@@ -156,7 +153,7 @@ public class Line {
                 return this.isInBounds(other.start) || this.isInBounds(other.end)
                         || other.isInBounds(this.start) || other.isInBounds(this.end);
 
-                    }
+            }
         } else if (!this.isVertical() && !other.isVertical()) {
             double m1 = this.getLineSlope();
             double m2 = other.getLineSlope();
@@ -257,5 +254,35 @@ public class Line {
                 ||
                 (this.start.equals(other.end) && this.end.equals(other.start));
 
+    }
+
+    /**
+     * A method that finds the closest intersection point to the start of the line
+     * with a given rectangle.
+     *
+     * @param rect - A given rectangle.
+     * @return returns the closest intersection point to the start of the line with
+     *         the given rectangle, or null if there is no intersection.
+     */
+    public Point closestIntersectionToStartOfLine(Rectangle rect) {
+        List<Point> intersectionPoints = rect.intersectionPoints(this);
+        if (intersectionPoints.isEmpty()) {
+            return null;
+        }
+
+        Point closestPoint = intersectionPoints.get(0);
+        double closestDistance = this.start.distance(closestPoint);
+
+        for (int i = 1; i < intersectionPoints.size(); i++) {
+            Point currentPoint = intersectionPoints.get(i);
+            double currentDistance = this.start.distance(currentPoint);
+
+            if (currentDistance < closestDistance) {
+                closestPoint = currentPoint;
+                closestDistance = currentDistance;
+            }
+        }
+
+        return closestPoint;
     }
 }

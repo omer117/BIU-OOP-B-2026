@@ -1,4 +1,11 @@
-package src;
+/*
+
+Name: Omer Asraf
+ID: 211384755
+Course: OOP
+
+*/
+
 
 /**
  * Velocity specifies the change in position on the `x` and the `y` axes.

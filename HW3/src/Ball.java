@@ -1,4 +1,12 @@
-package src;
+/*
+
+Name: Omer Asraf
+ID: 211384755
+Course: OOP
+
+*/
+
+
 import biuoop.DrawSurface;
 import java.awt.Color;
 import java.util.Random;
@@ -9,11 +17,12 @@ import java.util.Random;
  * according to its velocity, and create a random ball within specified frame
  * boundaries.
  */
-public class Ball {
+public class Ball implements Sprite {
     private Point center;
     private int r;
     private Color color;
     private Velocity velocity;
+    private GameEnvironment gameEnv;
 
     /**
      * Constructs a Ball with the specified center, radius, and color. The initial
@@ -28,6 +37,7 @@ public class Ball {
         this.r = r;
         this.color = color;
         this.velocity = new Velocity(0, 0);
+        this.gameEnv = new GameEnvironment();
     }
 
     /**
@@ -99,16 +109,61 @@ public class Ball {
      *
      * @param surface the DrawSurface on which to draw the ball.
      */
+    @Override
     public void drawOn(DrawSurface surface) {
         surface.setColor(this.color);
         surface.fillCircle(getX(), getY(), this.r);
     }
 
     /**
+     * Updates the ball's state based on the passage of time.
+     */
+    @Override
+    public void timePassed() {
+        moveOneStep();
+    }
+
+    /**
+     * Adds the ball to the given game, allowing it to be drawn and updated as part
+     * of the game's sprite collection.
+     */
+    @Override
+    public void addToGame(Game g) {
+        g.addSprite(this);
+    }
+
+    /**
      * Moves the ball one step according to its velocity.
      */
     public void moveOneStep() {
-        this.center = this.getVelocity().applyToPoint(this.center);
+        Point nextStep = this.getVelocity().applyToPoint(this.center);
+        Line trajectory = new Line(this.center, nextStep);
+        CollisionInfo info = this.gameEnv.getClosestCollision(trajectory);
+
+        if (info == null) {
+            this.center = nextStep;
+        } else {
+            Point collisionPoint = info.collisionPoint();
+            double dx = this.velocity.getDx();
+            double dy = this.velocity.getDy();
+
+            double epsilonX;
+            if (dx > 0) {
+                epsilonX = -Point.THRESHOLD;
+            } else {
+                epsilonX = Point.THRESHOLD;
+            }
+
+            double epsilonY;
+            if (dy > 0) {
+                epsilonY = -Point.THRESHOLD;
+            } else {
+                epsilonY = Point.THRESHOLD;
+            }
+
+            this.center = new Point(collisionPoint.getX() + epsilonX, collisionPoint.getY() + epsilonY);
+            this.velocity = info.collisionObject().hit(collisionPoint, this.velocity);
+        }
     }
 
     /**

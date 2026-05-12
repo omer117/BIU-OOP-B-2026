@@ -1,4 +1,3 @@
-package src;
 /*
 
 Name: Omer Asraf
@@ -6,6 +5,8 @@ ID: 211384755
 Course: OOP
 
 */
+
+
 
 /**
  * A Point is repressented by x and y coordinates.
