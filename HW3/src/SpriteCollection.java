@@ -1,10 +1,4 @@
-/*
 
-Name: Omer Asraf
-ID: 211384755
-Course: OOP
-
-*/
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,10 +1,3 @@
-/*
-
-Name: Omer Asraf
-ID: 211384755
-Course: OOP
-
-*/
 
 
 import biuoop.DrawSurface;
@@ -16,6 +9,13 @@ public class Paddle implements Sprite, Collidable {
     private KeyboardSensor keyboard;
     private Rectangle rectangle;
 
+    /**
+     * Constructs a Paddle with the specified rectangle and GUI for keyboard input.
+     *
+     * @param rectangle the rectangle representing the paddle's position and size.
+     * @param gui       the GUI object used to get the keyboard sensor for
+     *                  controlling the paddle.
+     */
     public Paddle(Rectangle rectangle, GUI gui) {
         this.rectangle = rectangle;
         this.keyboard = gui.getKeyboardSensor();
@@ -102,12 +102,14 @@ public class Paddle implements Sprite, Collidable {
         double topY = this.rectangle.getUpperLeft().getY();
         double bottomY = topY + this.rectangle.getHeight();
 
-        if (Math.abs(collisionPoint.getX() - leftX) < Point.THRESHOLD ||
+        if (Math.abs(collisionPoint.getX() - leftX) < Point.THRESHOLD
+                ||
                 Math.abs(collisionPoint.getX() - rightX) < Point.THRESHOLD) {
             newDx = -newDx;
         }
 
-        if (Math.abs(collisionPoint.getY() - topY) < Point.THRESHOLD ||
+        if (Math.abs(collisionPoint.getY() - topY) < Point.THRESHOLD
+                ||
                 Math.abs(collisionPoint.getY() - bottomY) < Point.THRESHOLD) {
             newDy = -newDy;
         }

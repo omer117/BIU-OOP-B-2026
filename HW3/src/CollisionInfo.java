@@ -1,12 +1,3 @@
-/*
-
-Name: Omer Asraf
-ID: 211384755
-Course: OOP
-
-*/
-
-
 /**
  * CollisionInfo class holds information about a collision, including the
  * collision point and the collidable object involved in the collision.

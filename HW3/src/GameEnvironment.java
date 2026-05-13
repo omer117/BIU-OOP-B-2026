@@ -1,10 +1,3 @@
-/*
-
-Name: Omer Asraf
-ID: 211384755
-Course: OOP
-
-*/
 
 
 import java.util.List;
@@ -17,6 +10,9 @@ import java.util.List;
 public class GameEnvironment {
     private List<Collidable> collidables;
 
+    /**
+     * Constructs a new GameEnvironment with an empty list of collidable objects.
+     */
     public GameEnvironment() {
         this.collidables = new java.util.ArrayList<>();
     }

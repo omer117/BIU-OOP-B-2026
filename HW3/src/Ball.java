@@ -1,13 +1,6 @@
-/*
-
-Name: Omer Asraf
-ID: 211384755
-Course: OOP
-
-*/
-
 
 import biuoop.DrawSurface;
+
 import java.awt.Color;
 import java.util.Random;
 
@@ -37,7 +30,16 @@ public class Ball implements Sprite {
         this.r = r;
         this.color = color;
         this.velocity = new Velocity(0, 0);
-        this.gameEnv = new GameEnvironment();
+    }
+
+    /**
+     * Sets the game environment for the ball, allowing it to detect collisions with
+     * other objects in the game.
+     *
+     * @param gameEnv the GameEnvironment to be associated with the ball.
+     */
+    public void setGameEnvironment(GameEnvironment gameEnv) {
+        this.gameEnv = gameEnv;
     }
 
     /**
@@ -147,18 +149,20 @@ public class Ball implements Sprite {
             double dx = this.velocity.getDx();
             double dy = this.velocity.getDy();
 
+            double ballEpsilon = 0.05;
+
             double epsilonX;
             if (dx > 0) {
-                epsilonX = -Point.THRESHOLD;
+                epsilonX = -ballEpsilon;
             } else {
-                epsilonX = Point.THRESHOLD;
+                epsilonX = ballEpsilon;
             }
 
             double epsilonY;
             if (dy > 0) {
-                epsilonY = -Point.THRESHOLD;
+                epsilonY = -ballEpsilon;
             } else {
-                epsilonY = Point.THRESHOLD;
+                epsilonY = ballEpsilon;
             }
 
             this.center = new Point(collisionPoint.getX() + epsilonX, collisionPoint.getY() + epsilonY);

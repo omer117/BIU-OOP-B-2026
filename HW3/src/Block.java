@@ -1,3 +1,4 @@
+
 /*
 
 Name: Omer Asraf
@@ -5,7 +6,7 @@ ID: 211384755
 Course: OOP
 
 */
-
+import java.awt.Color;
 
 import biuoop.DrawSurface;
 
@@ -18,11 +19,14 @@ public class Block implements Collidable, Sprite {
 
     private Rectangle rect;
 
-
+    /**
+     * Constructs a new block with the specified rectangle.
+     *
+     * @param rect the rectangle representing the block's shape and position.
+     */
     public Block(Rectangle rect) {
         this.rect = rect;
     }
-
 
     /**
      * Draws the block on the given surface.
@@ -35,13 +39,12 @@ public class Block implements Collidable, Sprite {
         surface.fillRectangle((int) this.rect.getUpperLeft().getX(), (int) this.rect.getUpperLeft().getY(),
                 (int) this.rect.getWidth(), (int) this.rect.getHeight());
 
-        surface.setColor(this.rect.getColor());
+        surface.setColor(Color.BLACK);
         surface.drawRectangle((int) this.rect.getUpperLeft().getX(),
                 (int) this.rect.getUpperLeft().getY(),
                 (int) this.rect.getWidth(),
                 (int) this.rect.getHeight());
     }
-
 
     /**
      * Updates the block's state based on the passage of time.
@@ -52,7 +55,7 @@ public class Block implements Collidable, Sprite {
     }
 
     /**
-     *  Returns the rectangle representing the block's collision area.
+     * Returns the rectangle representing the block's collision area.
      */
     @Override
     public Rectangle getCollisionRectangle() {
@@ -87,12 +90,15 @@ public class Block implements Collidable, Sprite {
         double topY = this.rect.getUpperLeft().getY();
         double bottomY = topY + this.rect.getHeight();
 
-        if (Math.abs(collisionPoint.getX() - leftX) < Point.THRESHOLD ||
+
+        if (Math.abs(collisionPoint.getX() - leftX) < Point.THRESHOLD
+        ||
                 Math.abs(collisionPoint.getX() - rightX) < Point.THRESHOLD) {
             newDx = -newDx;
         }
 
-        if (Math.abs(collisionPoint.getY() - topY) < Point.THRESHOLD ||
+        if (Math.abs(collisionPoint.getY() - topY) < Point.THRESHOLD
+        ||
                 Math.abs(collisionPoint.getY() - bottomY) < Point.THRESHOLD) {
             newDy = -newDy;
         }

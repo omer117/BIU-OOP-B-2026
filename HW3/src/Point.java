@@ -1,12 +1,3 @@
-/*
-
-Name: Omer Asraf
-ID: 211384755
-Course: OOP
-
-*/
-
-
 
 /**
  * A Point is repressented by x and y coordinates.
@@ -14,7 +5,7 @@ Course: OOP
  */
 public class Point {
     private double x, y;
-    public static final double THRESHOLD = 1e-6;
+    public static final double THRESHOLD = 0.001;
 
     /**
      * Our constructor creates a new Point,

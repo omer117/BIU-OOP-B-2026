@@ -1,10 +1,4 @@
-/*
 
-Name: Omer Asraf
-ID: 211384755
-Course: OOP
-
-*/
 
 import java.awt.Color;
 import java.util.ArrayList;
@@ -16,7 +10,7 @@ import java.util.List;
  * points with a given line and to set the color of the rectangle.
  *
  */
-class Rectangle {
+public class Rectangle {
     private Point upperLeft;
     private double width;
     private double height;
@@ -34,7 +28,7 @@ class Rectangle {
         this.upperLeft = upperLeft;
         this.width = width;
         this.height = height;
-        this.color = Color.BLACK;
+        this.color = Color.GRAY;
     }
 
     /**
@@ -55,7 +49,7 @@ class Rectangle {
         Line bottomEdge = new Line(x, y + h, x + w, y + h);
         Line leftEdge = new Line(x, y, x, y + h);
         Line rightEdge = new Line(x + w, y, x + w, y + h);
-        Line[] edges = { topEdge, bottomEdge, leftEdge, rightEdge };
+        Line[] edges = {topEdge, bottomEdge, leftEdge, rightEdge};
 
         for (int i = 0; i < edges.length; i++) {
             Point intersection = line.intersectionWith(edges[i]);
